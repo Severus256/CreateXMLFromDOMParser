@@ -5,6 +5,7 @@
  */
 package createxmlfromdomparser;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -12,7 +13,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -63,9 +67,15 @@ public class CreateXMLFromDomParser {
         TransformerFactory factoryTr = TransformerFactory.newInstance();
         try {
             Transformer transformer = factoryTr.newTransformer();
-            
+            /*Далее указываем в какой файл документ должен быть сохранен*/
+            DOMSource domSource = new DOMSource(doc);             // В конструктов пихаем документ, который создали выше
+            StreamResult streamFile = new StreamResult(new File("market.xml"));   // Указываем в какой файл сохранить документ
+            transformer.transform(domSource, streamFile);     //Трансформируем doc в файл
+            System.out.println("Документ сохранен");
         } catch (TransformerConfigurationException ex) {
             ex.printStackTrace();
+        } catch (TransformerException ex) {
+            Logger.getLogger(CreateXMLFromDomParser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
