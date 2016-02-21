@@ -5,9 +5,14 @@
  */
 package createxmlfromdomparser;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -53,6 +58,17 @@ public class CreateXMLFromDomParser {
         amountEl.setAttributeNode(attrAmount);
         productEl.appendChild(amountEl);
         /*Структура сформирована*/
+        
+        /*Теперь необходимо записать документ в файл*/
+        TransformerFactory factoryTr = TransformerFactory.newInstance();
+        try {
+            Transformer transformer = factoryTr.newTransformer();
+            
+        } catch (TransformerConfigurationException ex) {
+            ex.printStackTrace();
+        }
+        
+        
     }
 
 }
