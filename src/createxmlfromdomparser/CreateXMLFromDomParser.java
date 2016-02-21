@@ -48,6 +48,9 @@ public class CreateXMLFromDomParser {
         productEl.appendChild(priceEl);
         Element amountEl = doc.createElement("Количество");
         amountEl.appendChild(doc.createTextNode("20"));
+        Attr attrAmount = doc.createAttribute("type");
+        attrAmount.setValue("шт");
+        amountEl.setAttributeNode(attrAmount);
         productEl.appendChild(amountEl);
         /*Структура сформирована*/
     }
